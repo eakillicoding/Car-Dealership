@@ -16,7 +16,7 @@ class Technician(models.Model):
         return reverse("api_show_technician", kwargs={"id": self.id})
 
     def __str__(self):
-        return f"{self.first_name.upper()} {self.last_name.upper()}"
+        return f"{self.first_name} {self.last_name}"
 
 
 class Appointment(models.Model):
