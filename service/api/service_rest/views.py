@@ -120,3 +120,12 @@ def api_appointment_status(request, id, status):
         encoder=encoders.AppointmentDetailEncoder,
         safe=False
     )
+
+
+@require_http_methods(["GET"])
+def api_auto_vo(request):
+    autos = AutomobileVO.objects.all()
+    return JsonResponse(
+        {"auto_vos": autos},
+        encoder=encoders.AutomobileVOListEncoder
+    )
