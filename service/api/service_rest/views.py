@@ -20,16 +20,21 @@ def api_list_technicians(request):
         content = json.loads(request.body)
         try:
             technician = Technician.objects.create(**content)
+            return JsonResponse(
+                    technician,
+                    encoder=encoders.TechnicianDetailEncoder,
+                    safe=False
+                )
         except IntegrityError:
             return JsonResponse(
                 {"error": "The employee id is already in use!"},
                 status=400,
             )
-        return JsonResponse(
-            technician,
-            encoder=encoders.TechnicianDetailEncoder,
-            safe=False
-        )
+        except:
+            return JsonResponse(
+                {"error": "Cannot create technician"},
+                status=400,
+            )
 
 
 @require_http_methods(["GET", "DELETE"])
@@ -69,12 +74,18 @@ def api_list_appointments(request):
                 {"error": "Invalid technician id"},
                 status=400
             )
-        appointment = Appointment.objects.create(**content)
-        return JsonResponse(
-            appointment,
-            encoder=encoders.AppointmentDetailEncoder,
-            safe=False
-        )
+        try:
+            appointment = Appointment.objects.create(**content)
+            return JsonResponse(
+                appointment,
+                encoder=encoders.AppointmentDetailEncoder,
+                safe=False
+            )
+        except:
+            return JsonResponse(
+                {"Error": "Cannot create appointment"},
+                status=400
+            )
 
 
 @require_http_methods(["GET", "DELETE"])
