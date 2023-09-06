@@ -2,21 +2,21 @@ from django.db import models
 from django.urls import reverse
 
 
+class AutomobileVO(models.Model):
+    vin = models.CharField(max_length=17, unique=True)
+    sold = models.BooleanField()
+
+
 class Technician(models.Model):
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
     employee_id = models.PositiveIntegerField(unique=True)
 
     def get_api_url(self):
-        return reverse("api_technician", kwargs={"pk": self.id})
+        return reverse("api_show_technician", kwargs={"id": self.id})
 
-
-class AutomobileVO(models.Model):
-    vin = models.CharField(max_length=17, unique=True)
-    sold = models.BooleanField()
-
-    def get_api_url(self):
-        return reverse("api_automobile_vo", kwargs={"pk": self.id})
+    def __str__(self):
+        return f"{self.first_name.upper()} {self.last_name.upper()}"
 
 
 class Appointment(models.Model):
@@ -32,4 +32,7 @@ class Appointment(models.Model):
     )
 
     def get_api_url(self):
-        return reverse("api_appointment", kwargs={"pk": self.id})
+        return reverse("api_show_appointment", kwargs={"id": self.id})
+
+    def __str__(self):
+        return self.customer
