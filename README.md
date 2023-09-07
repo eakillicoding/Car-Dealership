@@ -2,7 +2,7 @@
 
 Team:
 
-* Person 1 - Which microservice?
+* Emre Akilli - Sales Microservice
 * Person 2 - Which microservice?
 
 ## Design
