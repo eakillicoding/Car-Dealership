@@ -2,16 +2,7 @@ from common.json import ModelEncoder
 from .models import Technician, Appointment, AutomobileVO
 
 
-class TechnicianListEncoder(ModelEncoder):
-    model = Technician
-    properties = [
-        "first_name",
-        "last_name",
-        "id"
-    ]
-
-
-class TechnicianDetailEncoder(ModelEncoder):
+class TechnicianEncoder(ModelEncoder):
     model = Technician
     properties = [
         "first_name",
@@ -21,17 +12,7 @@ class TechnicianDetailEncoder(ModelEncoder):
     ]
 
 
-class AppointmentListEncoder(ModelEncoder):
-    model = Appointment
-    properties = [
-        "customer",
-        "date_time",
-        "status",
-        "id"
-    ]
-
-
-class AppointmentDetailEncoder(ModelEncoder):
+class AppointmentEncoder(ModelEncoder):
     model = Appointment
     properties = [
         "date_time",
@@ -42,11 +23,11 @@ class AppointmentDetailEncoder(ModelEncoder):
         "technician"
     ]
     encoders = {
-        "technician": TechnicianDetailEncoder(),
+        "technician": TechnicianEncoder(),
     }
 
 
-class AutomobileVOListEncoder(ModelEncoder):
+class AutomobileVOEncoder(ModelEncoder):
     model = AutomobileVO
     properties = [
         "vin",

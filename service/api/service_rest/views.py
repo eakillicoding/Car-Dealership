@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from django.views.decorators.http import require_http_methods
 from django.db import IntegrityError
 from django.http import JsonResponse, Http404
@@ -14,7 +13,7 @@ def api_list_technicians(request):
         technicians = Technician.objects.all()
         return JsonResponse(
             {"technicians": technicians},
-            encoder=encoders.TechnicianListEncoder
+            encoder=encoders.TechnicianEncoder
         )
     else:
         content = json.loads(request.body)
@@ -22,7 +21,7 @@ def api_list_technicians(request):
             technician = Technician.objects.create(**content)
             return JsonResponse(
                     technician,
-                    encoder=encoders.TechnicianDetailEncoder,
+                    encoder=encoders.TechnicianEncoder,
                     safe=False
                 )
         except IntegrityError:
@@ -41,20 +40,20 @@ def api_list_technicians(request):
 def api_show_technician(request, id):
     try:
         technician = Technician.objects.get(id=id)
+        if request.method == "GET":
+            return JsonResponse(
+                technician,
+                encoder=encoders.TechnicianEncoder,
+                safe=False
+            )
+        else:
+            count, _ = technician.delete()
+            return JsonResponse({"deleted": count > 0})
     except Technician.DoesNotExist:
         return JsonResponse(
             {"error": "Invalid technician id"},
             status=400
         )
-    if request.method == "GET":
-        return JsonResponse(
-            technician,
-            encoder=encoders.TechnicianDetailEncoder,
-            safe=False
-        )
-    else:
-        count, _ = technician.delete()
-        return JsonResponse({"deleted": count > 0})
 
 
 @require_http_methods(["GET", "POST"])
@@ -63,7 +62,7 @@ def api_list_appointments(request):
         appointments = Appointment.objects.all()
         return JsonResponse(
             {"appointments": appointments},
-            encoder=encoders.AppointmentListEncoder
+            encoder=encoders.AppointmentEncoder
         )
     else:
         content = json.loads(request.body)
@@ -78,7 +77,7 @@ def api_list_appointments(request):
             appointment = Appointment.objects.create(**content)
             return JsonResponse(
                 appointment,
-                encoder=encoders.AppointmentDetailEncoder,
+                encoder=encoders.AppointmentEncoder,
                 safe=False
             )
         except:
@@ -92,20 +91,20 @@ def api_list_appointments(request):
 def api_show_appointment(request, id):
     try:
         appointment = Appointment.objects.get(id=id)
+        if request.method == "GET":
+            return JsonResponse(
+                appointment,
+                encoder=encoders.AppointmentEncoder,
+                safe=False
+            )
+        else:
+            count, _ = appointment.delete()
+            return JsonResponse({"deleted": count > 0})
     except Appointment.DoesNotExist:
         return JsonResponse(
             {"error": "Invalid appointment id"},
             status=400
         )
-    if request.method == "GET":
-        return JsonResponse(
-            appointment,
-            encoder=encoders.AppointmentDetailEncoder,
-            safe=False
-        )
-    else:
-        count, _ = appointment.delete()
-        return JsonResponse({"deleted": count > 0})
 
 
 @require_http_methods(["PUT"])
@@ -119,18 +118,18 @@ def api_appointment_status(request, id, status):
 
     try:
         appointment = Appointment.objects.get(id=id)
+        appointment.status = status
+        appointment.save()
+        return JsonResponse(
+            appointment,
+            encoder=encoders.AppointmentEncoder,
+            safe=False
+        )
     except Appointment.DoesNotExist:
         return JsonResponse(
             {"error": "Invalid appointment id"},
             status=400
         )
-    appointment.status = status
-    appointment.save()
-    return JsonResponse(
-        appointment,
-        encoder=encoders.AppointmentDetailEncoder,
-        safe=False
-    )
 
 
 @require_http_methods(["GET"])
@@ -138,5 +137,5 @@ def api_auto_vo(request):
     autos = AutomobileVO.objects.all()
     return JsonResponse(
         {"auto_vos": autos},
-        encoder=encoders.AutomobileVOListEncoder
+        encoder=encoders.AutomobileVOEncoder
     )
