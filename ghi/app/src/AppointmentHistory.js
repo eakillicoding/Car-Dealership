@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 
-
-export default function ListAppointments() {
-    let [appointments, setAppointments] = useState([]);
+export default function ServiceHistory() {
+    const [appointments, setAppointments] = useState([]);
+    const [query, setQuery] = useState('');
 
     async function loadAppointments() {
         try {
@@ -10,8 +10,7 @@ export default function ListAppointments() {
 
             if (response.ok) {
                 const data = await response.json();
-                const activeAppointments = data.appointments.filter((aptmt) => aptmt.status === "active");
-                setAppointments(activeAppointments);
+                setAppointments(data.appointments);
             }
 
         } catch(e) {
@@ -23,41 +22,31 @@ export default function ListAppointments() {
         loadAppointments();
     }, []);
 
-    async function cancelAppointment(id) {
-        try {
-            const response = await fetch(
-                `http://localhost:8080/api/appointments/${id}/cancel/`,
-                {method: "put"}
-            );
-
-            if(response.ok) {
-                loadAppointments();
-            }
-
-        } catch(e) {
-            console.error(e);
-        }
+    const handleInputChange = (e) => {
+        setQuery(e.target.value);
     };
 
-    async function finishAppointment(id) {
-        try {
-            const response = await fetch(
-                `http://localhost:8080/api/appointments/${id}/finish/`,
-                {method: "put"}
-            );
+    const handleSearch = () => {
 
-            if(response.ok) {
-                loadAppointments();
-            }
-
-        } catch(e) {
-            console.error(e);
+        if (`${query}` !== '') {
+            setAppointments(appointments.filter((aptmt) => aptmt.vin === `${query}`));
+        } else {
+            loadAppointments();
         }
+
+        setQuery('');
     };
+
 
     return (
         <div>
-            <h1>Service Appointments</h1>
+            <h1>Service History</h1>
+            <div className="input-group mb-3">
+                <input type="text" className="form-control" placeholder="Search by VIN..." id="search" onChange={handleInputChange} value={query} />
+                <div className="input-group-append">
+                    <button className="btn btn-outline-secondary" type="button" id="button-addon2" onClick={handleSearch}>Search</button>
+                </div>
+            </div>
             <table className="table table-striped">
                 <thead>
                     <tr>
@@ -68,6 +57,7 @@ export default function ListAppointments() {
                         <th>Time</th>
                         <th>Technician</th>
                         <th>Reason</th>
+                        <th>Status</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -80,10 +70,7 @@ export default function ListAppointments() {
                             <td>{appointment.time}</td>
                             <td>{appointment.technician.first_name} {appointment.technician.last_name}</td>
                             <td>{appointment.reason}</td>
-                            <td>
-                                <button type="button" className="btn btn-danger" onClick={() => cancelAppointment(appointment.id)}>Cancel</button>
-                                <button type="button" className="btn btn-success" onClick={() => finishAppointment(appointment.id)}>Finish</button>
-                            </td>
+                            <td>{appointment.status}</td>
                         </tr>
                     ))}
                 </tbody>
