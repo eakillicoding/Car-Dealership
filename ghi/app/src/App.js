@@ -8,6 +8,12 @@ import CustomerAdd from './CustomerAdd';
 import SalesList from './SalesList';
 import SalesAdd from './SalesAdd';
 import SalesPeopleHistory from './SalesPeopleHistory';
+import ManufacturerList from './ManufacturerList';
+import ManufacturersAdd from './ManufacturersAdd';
+import ModelsList from './ModelsList';
+import ModelsAdd from './ModelsAdd';
+import AutomobilesList from './AutomobilesList';
+import AutomobilesAdd from './AutomobilesAdd';
 
 function App() {
   return (
@@ -16,6 +22,18 @@ function App() {
       <div className="container">
         <Routes>
           <Route path="/" element={<MainPage />} />
+          <Route path="manufacturers/">
+            <Route index element={<ManufacturerList />} />
+            <Route path="new" element={<ManufacturersAdd />} />
+          </Route>
+          <Route path="models/">
+            <Route index element={<ModelsList />} />
+            <Route path="new"element={<ModelsAdd />} />
+          </Route>
+          <Route path="automobiles/">
+            <Route index element={<AutomobilesList />} />
+            <Route path="new"element={<AutomobilesAdd />} />
+          </Route>
           <Route path="salespeople/">
             <Route index element={<SalesPeopleList />} />
             <Route path="new" element={<SalesPeopleAdd />} />
