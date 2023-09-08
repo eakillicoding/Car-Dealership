@@ -29,7 +29,7 @@ export default function CreateAppointment() {
             const response = await fetch(
                 'http://localhost:8080/api/appointments/',
                 {method: "post", body: formJson, headers: {'Content-Type': 'application/json'}}
-                );
+            );
 
             if (response.ok) {
                 event.target.reset();

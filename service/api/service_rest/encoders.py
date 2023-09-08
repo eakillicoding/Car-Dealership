@@ -30,9 +30,16 @@ class AppointmentEncoder(ModelEncoder):
 
     def get_extra_data(self, o):
         date_obj = datetime.fromisoformat(str(o.date_time))
+
+        if o.vin in [auto.vin for auto in AutomobileVO.objects.all()]:
+            vip = "Yes"
+        else:
+            vip = "No"
+
         return {
             "date": date_obj.strftime("%m/%d/%Y").lstrip('0'),
-            "time": date_obj.strftime("%I:%M %p").lstrip('0')
+            "time": date_obj.strftime("%I:%M %p").lstrip('0'),
+            "vip": vip
         }
 
 
