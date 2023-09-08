@@ -18,6 +18,8 @@ def api_list_technicians(request):
     else:
         content = json.loads(request.body)
         try:
+            content["first_name"] = content["first_name"].capitalize()
+            content["last_name"] = content["last_name"].capitalize()
             technician = Technician.objects.create(**content)
             return JsonResponse(
                     technician,
@@ -29,9 +31,9 @@ def api_list_technicians(request):
                 {"error": "The employee id is already in use!"},
                 status=400,
             )
-        except:
+        except Exception as e:
             return JsonResponse(
-                {"error": "Cannot create technician"},
+                {"error": f"{e}"},
                 status=400,
             )
 
@@ -80,9 +82,9 @@ def api_list_appointments(request):
                 encoder=encoders.AppointmentEncoder,
                 safe=False
             )
-        except:
+        except Exception as e:
             return JsonResponse(
-                {"Error": "Cannot create appointment"},
+                {"Error": f"{e}"},
                 status=400
             )
 

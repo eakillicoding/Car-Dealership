@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 
 export default function ListTechnicians() {
     let [technicians, setTechnicians] = useState([]);
-    console.log(technicians);
+
     useEffect(() => {
         async function loadTechnicians() {
             try {

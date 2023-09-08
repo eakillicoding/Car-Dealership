@@ -13,6 +13,7 @@ export default function CreateTechnician() {
 
             if (response.ok) {
                 event.target.reset();
+                window.location.href = "/technicians";
             }
 
         } catch(e) {
@@ -28,16 +29,16 @@ export default function CreateTechnician() {
                         <h1>Add a Technician</h1>
                         <form onSubmit={handleSubmit} id="technician-form">
                             <div className="form-floating mb-3">
-                                <input placeholder="First name" required type="text" id="FirstName" name="first_name" className="form-control"/>
-                                <label htmlFor="FirstName">First name...</label>
+                                <input required placeholder="First name..." type="text" id="firstName" name="first_name" className="form-control"/>
+                                <label htmlFor="firstName">First name...</label>
                             </div>
                             <div className="form-floating mb-3">
-                                <input placeholder="Last name" required type="text" id="LastName" name="last_name" className="form-control"/>
-                                <label htmlFor="LastName">Last name...</label>
+                                <input required placeholder="Last name..." type="text" id="lastName" name="last_name" className="form-control"/>
+                                <label htmlFor="lastName">Last name...</label>
                             </div>
                             <div className="form-floating mb-3">
-                                <input placeholder="Employee ID" required type="number" id="EmployeeID" name="employee_id" className="form-control"/>
-                                <label htmlFor="EmployeeID">Employee ID...</label>
+                                <input required placeholder="Employee ID..." type="number" id="employeeID" name="employee_id" className="form-control"/>
+                                <label htmlFor="employeeID">Employee ID...</label>
                             </div>
                             <button type="submit" className="btn btn-primary">Create</button>
                         </form>
