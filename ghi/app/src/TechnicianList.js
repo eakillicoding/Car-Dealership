@@ -3,21 +3,22 @@ import React, { useState, useEffect } from 'react';
 
 export default function ListTechnicians() {
     let [technicians, setTechnicians] = useState([]);
+    
+    async function loadTechnicians() {
+        try {
+            const response = await fetch('http://localhost:8080/api/technicians/');
+
+            if(response.ok) {
+                const data = await response.json();
+                setTechnicians(data.technicians);
+            }
+
+        } catch(e) {
+            console.error(e);
+        }
+    }
 
     useEffect(() => {
-        async function loadTechnicians() {
-            try {
-                const response = await fetch('http://localhost:8080/api/technicians/');
-
-                if(response.ok) {
-                    const data = await response.json();
-                    setTechnicians(data.technicians);
-                }
-
-            } catch(e) {
-                console.error(e);
-            }
-        }
         loadTechnicians();
     }, []);
 
