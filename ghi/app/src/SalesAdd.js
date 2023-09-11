@@ -84,7 +84,6 @@ function SalesAdd () {
         const response = await fetch(url, fetchConfig)
 
         if (response.ok) {
-            event.target.reset()
             setAutomobile('')
             setSalesperson('')
             setCustomer('')
@@ -103,7 +102,7 @@ function SalesAdd () {
                             <select value={automobile} onChange={handleAutomobileChange} required name="automobile" id="automobile" className="form-select" >
                                 <option value="">Choose an automobile VIN...</option>
                                 {automobiles.filter(automobile => automobile.sold===false).map(automobile => {
-                                    return(
+                                    return (
                                         <option key={automobile.vin} value={automobile.vin}>
                                             {automobile.vin}
                                         </option>
@@ -116,7 +115,7 @@ function SalesAdd () {
                             <select value={salesperson} onChange={handleSalespersonChange} required name="salesperson" id="salesperson" className="form-select" >
                                 <option value="">Choose a salesperson...</option>
                                 {salespeople.map(salesperson => {
-                                    return(
+                                    return (
                                         <option key={salesperson.employee_id} value={salesperson.employee_id}>
                                             {salesperson.first_name} {salesperson.last_name}
                                         </option>
@@ -129,7 +128,7 @@ function SalesAdd () {
                             <select value={customer} onChange={handleCustomerChange} required name="customer" id="customer" className="form-select" >
                                 <option value="">Choose a customer...</option>
                                 {customers.map(customer => {
-                                    return(
+                                    return (
                                         <option key={customer.id} value={customer.id}>
                                             {customer.first_name} {customer.last_name}
                                         </option>

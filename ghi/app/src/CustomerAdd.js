@@ -45,7 +45,6 @@ function CustomerAdd () {
         const response = await fetch(url, fetchConfig)
 
         if (response.ok) {
-            event.target.reset()
             setFirstName('')
             setLastName('')
             setAddress('')

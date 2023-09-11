@@ -38,7 +38,6 @@ function SalesPeopleAdd () {
         const response = await fetch(url, fetchConfig);
 
         if (response.ok) {
-            event.target.reset()
             setFirstName('')
             setLastName('')
             setEmployeeID('')
