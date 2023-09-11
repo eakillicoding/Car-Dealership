@@ -10,7 +10,8 @@ function CustomersList() {
             if (response.ok) {
                 const data = await response.json()
                 setCustomers(data.customers)
-            } 
+            }
+
         } catch(e) {
             console.error(e)
         }

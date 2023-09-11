@@ -17,6 +17,7 @@ function SalesAdd () {
                 const data = await response.json()
                 setAutomobiles(data.autos)
             }
+
         } catch(e) {
             console.error(e)
         }
@@ -30,6 +31,7 @@ function SalesAdd () {
                 const data = await response.json()
                 setSalespeople(data.salespeople)
             }
+
         } catch(e) {
             console.error(e)
         }
@@ -43,6 +45,7 @@ function SalesAdd () {
                 const data = await response.json()
                 setCustomers(data.customers)
             }
+
         } catch(e) {
             console.error(e)
         }
@@ -108,6 +111,7 @@ function SalesAdd () {
 
             if (soldresponse.ok) {
             }
+
         } catch(e) {
             console.error(e)
         }
@@ -121,6 +125,7 @@ function SalesAdd () {
                 setCustomer('')
                 setPrice('')
             }
+
         } catch(e) {
             console.error(e)
         }

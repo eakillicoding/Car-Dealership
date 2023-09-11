@@ -13,6 +13,7 @@ function SalesPeopleHistory () {
                 const data = await response.json()
                 setSalespeople(data.salespeople)
             }
+
         } catch(e) {
             console.error(e)
         }
@@ -25,7 +26,8 @@ function SalesPeopleHistory () {
             if (response.ok) {
                 const data = await response.json()
                 setSales(data.sales)
-            };
+            }
+
         } catch(e) {
             console.error(e)
         }

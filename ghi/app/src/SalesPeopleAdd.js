@@ -35,7 +35,7 @@ function SalesPeopleAdd () {
                 'Content-Type': 'application/json',
             },
         };
-        
+
         try {
             const response = await fetch(url, fetchConfig);
 
@@ -43,7 +43,8 @@ function SalesPeopleAdd () {
                 setFirstName('')
                 setLastName('')
                 setEmployeeID('')
-            };
+            }
+
         } catch(e) {
             console.error(e)
         }

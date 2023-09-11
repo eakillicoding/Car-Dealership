@@ -52,6 +52,7 @@ function CustomerAdd () {
                 setAddress('')
                 setPhoneNumber('')
             }
+
         } catch(e) {
             console.error(e)
         }

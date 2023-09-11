@@ -6,11 +6,12 @@ function SalesPeopleList() {
     async function fetchSalespeopleData() {
         try {
             const response = await fetch("http://localhost:8090/api/salespeople/")
-            
+
             if (response.ok) {
                 const data = await response.json()
                 setSalesPeople(data.salespeople)
-            } 
+            }
+
         } catch(e) {
             console.error(e)
         }
