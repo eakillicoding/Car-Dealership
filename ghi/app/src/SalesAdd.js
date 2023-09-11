@@ -82,7 +82,7 @@ function SalesAdd () {
             },
         };
         const response = await fetch(url, fetchConfig)
-        
+
         if (response.ok) {
             event.target.reset()
             setAutomobile('')
@@ -99,7 +99,7 @@ function SalesAdd () {
                     <h1>Record a new sale</h1>
                     <form onSubmit={(event) => handleSubmit(event)} id="create-sale-form">
                         <h5>Automobile VIN</h5>
-                        <div className="form-floating mb-3">
+                        <div className="mb-3">
                             <select value={automobile} onChange={handleAutomobileChange} required name="automobile" id="automobile" className="form-select" >
                                 <option value="">Choose an automobile VIN...</option>
                                 {automobiles.filter(automobile => automobile.sold===false).map(automobile => {
@@ -112,7 +112,7 @@ function SalesAdd () {
                             </select>
                         </div>
                         <h5>Salesperson</h5>
-                        <div className="form-floating mb-3">
+                        <div className="mb-3">
                             <select value={salesperson} onChange={handleSalespersonChange} required name="salesperson" id="salesperson" className="form-select" >
                                 <option value="">Choose a salesperson...</option>
                                 {salespeople.map(salesperson => {
@@ -125,7 +125,7 @@ function SalesAdd () {
                             </select>
                         </div>
                         <h5>Customer</h5>
-                        <div className="form-floating mb-3">
+                        <div className="mb-3">
                             <select value={customer} onChange={handleCustomerChange} required name="customer" id="customer" className="form-select" >
                                 <option value="">Choose a customer...</option>
                                 {customers.map(customer => {

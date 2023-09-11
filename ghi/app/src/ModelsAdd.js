@@ -74,7 +74,7 @@ function ModelsAdd () {
                             <input value={pictureUrl} onChange={handlePictureUrlChange} placeholder="Picture URL" required type="text" id="picture_url" autoComplete="on" className="form-control" />
                             <label htmlFor="picture_url">Picture URL...</label>
                         </div>
-                        <div className="form-floating mb-3">
+                        <div className="mb-3">
                             <select value={manufacturer} onChange={handleManufacturerChange} required name="manufacturer_id" id="manufacturer_id" className="form-select" >
                                 <option value="">Choose a manufacturer...</option>
                                 {manufacturers.map(manufacturer => {

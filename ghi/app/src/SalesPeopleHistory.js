@@ -18,7 +18,7 @@ function SalesPeopleHistory () {
     const fetchSalesData = async () => {
         const url = 'http://localhost:8090/api/sales/'
         const response = await fetch(url)
-        
+
             if (response.ok) {
                 const data = await response.json()
                 setSales(data.sales)
@@ -39,7 +39,7 @@ function SalesPeopleHistory () {
         <div>
             <h1>Salesperson History</h1>
             <div className="row">
-                <div className="form-floating mb-3">
+                <div className="mb-3">
                     <select value={filter} onChange={handleFilter} required name="salesperson" id="salesperson" className="form-select" >
                         <option value="">Choose a Salesperson</option>
                         {salespeople.map(salesperson => {

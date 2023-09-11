@@ -27,34 +27,38 @@ function App() {
       <div className="container">
         <Routes>
           <Route path="/" element={<MainPage />} />
-          <Route path="/technicians" element={<ListTechnicians />} />
-          <Route path="/technicians/create" element={<CreateTechnician />} />
-          <Route path="/appointments" element={<ListAppointments />} />
-          <Route path="/appointments/create" element={<CreateAppointment />} />
-          <Route path="/appointments/history" element={<ServiceHistory />} />
+          <Route path="technicians/">
+            <Route index element={<ListTechnicians />} />
+            <Route path="create" element={<CreateTechnician />} />
+          </Route>
+          <Route path="appointments/">
+            <Route index element={<ListAppointments />} />
+            <Route path="create" element={<CreateAppointment />} />
+            <Route path="history" element={<ServiceHistory />} />
+          </Route>
           <Route path="manufacturers/">
             <Route index element={<ManufacturerList />} />
-            <Route path="new" element={<ManufacturersAdd />} />
+            <Route path="create" element={<ManufacturersAdd />} />
           </Route>
           <Route path="models/">
             <Route index element={<ModelsList />} />
-            <Route path="new"element={<ModelsAdd />} />
+            <Route path="create"element={<ModelsAdd />} />
           </Route>
           <Route path="automobiles/">
             <Route index element={<AutomobilesList />} />
-            <Route path="new"element={<AutomobilesAdd />} />
+            <Route path="create"element={<AutomobilesAdd />} />
           </Route>
           <Route path="salespeople/">
             <Route index element={<SalesPeopleList />} />
-            <Route path="new" element={<SalesPeopleAdd />} />
+            <Route path="create" element={<SalesPeopleAdd />} />
           </Route>
           <Route path="customers/">
             <Route index element={<CustomersList />} />
-            <Route path="new" element={<CustomerAdd />} />
+            <Route path="create" element={<CustomerAdd />} />
           </Route>
           <Route path="sales/">
             <Route index element={<SalesList />} />
-            <Route path="new" element={<SalesAdd />} />
+            <Route path="create" element={<SalesAdd />} />
             <Route path="history" element={<SalesPeopleHistory />} />
           </Route>
         </Routes>
