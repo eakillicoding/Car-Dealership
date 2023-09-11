@@ -4,13 +4,15 @@ function SalesList() {
     const [sales, setSales] = useState([])
 
     async function fetchSalesData() {
-        const response = await fetch("http://localhost:8090/api/sales/")
+        try {
+            const response = await fetch("http://localhost:8090/api/sales/")
 
-        if (response.ok) {
-            const data = await response.json()
-            setSales(data.sales)
-        } else {
-            console.error(response)
+            if (response.ok) {
+                const data = await response.json()
+                setSales(data.sales)
+            } 
+        } catch(e) {
+            console.error(e)
         }
     };
 

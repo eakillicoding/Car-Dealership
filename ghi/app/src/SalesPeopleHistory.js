@@ -6,23 +6,29 @@ function SalesPeopleHistory () {
     const [sales, setSales] = useState([])
 
     const fetchSalespeopleData = async () => {
-        const url = 'http://localhost:8090/api/salespeople/'
-        const response = await fetch(url)
+        try {
+            const response = await fetch('http://localhost:8090/api/salespeople/')
 
-        if (response.ok) {
-            const data = await response.json()
-            setSalespeople(data.salespeople)
-        };
+            if (response.ok) {
+                const data = await response.json()
+                setSalespeople(data.salespeople)
+            }
+        } catch(e) {
+            console.error(e)
+        }
     };
 
     const fetchSalesData = async () => {
-        const url = 'http://localhost:8090/api/sales/'
-        const response = await fetch(url)
+        try {
+            const response = await fetch('http://localhost:8090/api/sales/')
 
             if (response.ok) {
                 const data = await response.json()
                 setSales(data.sales)
             };
+        } catch(e) {
+            console.error(e)
+        }
     };
 
     const handleFilter = (event) => {

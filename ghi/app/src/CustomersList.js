@@ -4,13 +4,15 @@ function CustomersList() {
     const [customers, setCustomers] = useState([])
 
     async function fetchCustomersData() {
-        const response = await fetch("http://localhost:8090/api/customers/")
-        
-        if (response.ok) {
-            const data = await response.json()
-            setCustomers(data.customers)
-        } else {
-            console.error(response)
+        try {
+            const response = await fetch("http://localhost:8090/api/customers/")
+
+            if (response.ok) {
+                const data = await response.json()
+                setCustomers(data.customers)
+            } 
+        } catch(e) {
+            console.error(e)
         }
     };
 

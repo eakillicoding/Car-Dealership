@@ -10,33 +10,42 @@ function SalesAdd () {
     const [price, setPrice] = useState('')
 
     const fetchAutomobilesData = async () => {
-        const url = 'http://localhost:8100/api/automobiles/'
-        const response = await fetch(url)
+        try {
+            const response = await fetch('http://localhost:8100/api/automobiles/')
 
             if (response.ok) {
                 const data = await response.json()
                 setAutomobiles(data.autos)
-            };
+            }
+        } catch(e) {
+            console.error(e)
+        }
     };
 
     const fetchSalespeopleData = async () => {
-        const url = 'http://localhost:8090/api/salespeople/'
-        const response = await fetch(url)
+        try {
+            const response = await fetch('http://localhost:8090/api/salespeople/')
 
             if (response.ok) {
                 const data = await response.json()
                 setSalespeople(data.salespeople)
-            };
+            }
+        } catch(e) {
+            console.error(e)
+        }
     };
 
     const fetchCustomersData = async () => {
-        const url = 'http://localhost:8090/api/customers/'
-        const response = await fetch(url)
+        try {
+            const response = await fetch('http://localhost:8090/api/customers/')
 
             if (response.ok) {
                 const data = await response.json()
                 setCustomers(data.customers)
-            };
+            }
+        } catch(e) {
+            console.error(e)
+        }
     };
 
     useEffect(() => {
@@ -81,14 +90,40 @@ function SalesAdd () {
                 'Content-Type': 'application/json',
             },
         };
-        const response = await fetch(url, fetchConfig)
 
-        if (response.ok) {
-            setAutomobile('')
-            setSalesperson('')
-            setCustomer('')
-            setPrice('')
+        const solddata = {
+            "sold": true
+        }
+
+        const fetchSoldConfig = {
+            method: "put",
+            body: JSON.stringify(solddata),
+            headers: {
+                'Content-Type': 'application/json',
+            },
         };
+
+        try {
+            const soldresponse = await fetch(`http://localhost:8100/api/automobiles/${automobile}/`, fetchSoldConfig)
+
+            if (soldresponse.ok) {
+            }
+        } catch(e) {
+            console.error(e)
+        }
+
+        try {
+            const response = await fetch(url, fetchConfig)
+
+            if (response.ok) {
+                setAutomobile('')
+                setSalesperson('')
+                setCustomer('')
+                setPrice('')
+            }
+        } catch(e) {
+            console.error(e)
+        }
     };
 
     return (

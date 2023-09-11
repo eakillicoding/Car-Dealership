@@ -35,13 +35,18 @@ function SalesPeopleAdd () {
                 'Content-Type': 'application/json',
             },
         };
-        const response = await fetch(url, fetchConfig);
+        
+        try {
+            const response = await fetch(url, fetchConfig);
 
-        if (response.ok) {
-            setFirstName('')
-            setLastName('')
-            setEmployeeID('')
-        };
+            if (response.ok) {
+                setFirstName('')
+                setLastName('')
+                setEmployeeID('')
+            };
+        } catch(e) {
+            console.error(e)
+        }
     };
 
     return (

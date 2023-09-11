@@ -42,14 +42,19 @@ function CustomerAdd () {
                 'Content-Type': 'application/json',
             },
         };
-        const response = await fetch(url, fetchConfig)
 
-        if (response.ok) {
-            setFirstName('')
-            setLastName('')
-            setAddress('')
-            setPhoneNumber('')
-        };
+        try {
+            const response = await fetch(url, fetchConfig)
+
+            if (response.ok) {
+                setFirstName('')
+                setLastName('')
+                setAddress('')
+                setPhoneNumber('')
+            }
+        } catch(e) {
+            console.error(e)
+        }
     };
 
     return (
