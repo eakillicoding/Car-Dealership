@@ -3,7 +3,7 @@ from django.db import IntegrityError
 from django.http import JsonResponse, Http404
 import json
 
-from .models import Technician, AutomobileVO, Appointment
+from .models import Technician, Appointment
 from service_rest import encoders
 
 
@@ -132,12 +132,3 @@ def api_appointment_status(request, id, status):
             {"error": "Invalid appointment id"},
             status=400
         )
-
-
-@require_http_methods(["GET"])
-def api_auto_vo(request):
-    autos = AutomobileVO.objects.all()
-    return JsonResponse(
-        {"auto_vos": autos},
-        encoder=encoders.AutomobileVOEncoder
-    )

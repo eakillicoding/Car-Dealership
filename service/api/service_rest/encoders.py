@@ -41,11 +41,3 @@ class AppointmentEncoder(ModelEncoder):
             "time": date_obj.strftime("%I:%M %p").lstrip('0'),
             "vip": vip
         }
-
-
-class AutomobileVOEncoder(ModelEncoder):
-    model = AutomobileVO
-    properties = [
-        "vin",
-        "sold"
-    ]

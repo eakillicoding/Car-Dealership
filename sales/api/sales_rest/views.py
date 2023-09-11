@@ -1,6 +1,6 @@
 from django.views.decorators.http import require_http_methods
 from .models import AutomobileVO, Salesperson, Customer, Sale
-from .encoders import AutomobileVOEncoder, SalespersonEncoder, CustomerEncoder, SaleEncoder
+from .encoders import SalespersonEncoder, CustomerEncoder, SaleEncoder
 from django.http import JsonResponse
 import json
 
@@ -186,13 +186,3 @@ def api_show_sale(request, id):
                 {"message": "Sale Does Not Exist"},
                 status = 400,
             )
-
-
-@require_http_methods(["GET", "POST"])
-def api_list_automobiles(request):
-    if request.method == "GET":
-        automobiles = AutomobileVO.objects.all()
-        return JsonResponse(
-            {"automobiles": automobiles},
-            encoder=AutomobileVOEncoder,
-        )
