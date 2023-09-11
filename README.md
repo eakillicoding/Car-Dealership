@@ -15,5 +15,6 @@ Created an AutomobileVO model, which is polled from the Inventory automobile mod
 
 ## Sales microservice
 
-Explain your models and integration with the inventory
-microservice, here.
+Created models for the Sales microservice that represent a Salesperson, Customer, Sale,
+and an AutomobileVO that polls from the Inventory microservice api to update or create 
+automobiles in the sales microservice.
