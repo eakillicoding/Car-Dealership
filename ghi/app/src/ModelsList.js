@@ -4,13 +4,16 @@ function ModelsList() {
     const [models, setModels] = useState([])
 
     async function fetchModelsData() {
-        const response = await fetch("http://localhost:8100/api/models/")
+        try {
+            const response = await fetch("http://localhost:8100/api/models/")
 
-        if (response.ok) {
-            const data = await response.json()
-            setModels(data.models)
-        } else {
-            console.error(response)
+            if (response.ok) {
+                const data = await response.json()
+                setModels(data.models)
+            }
+
+        } catch(e) {
+            console.error(e)
         }
     };
 

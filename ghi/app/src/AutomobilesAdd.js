@@ -8,13 +8,17 @@ function AutomobilesAdd () {
     const [models, setModels] = useState([])
 
     const fetchModelsData = async () => {
-        const url = 'http://localhost:8100/api/models/'
-        const response = await fetch(url)
+        try {
+            const response = await fetch('http://localhost:8100/api/models/')
 
-        if (response.ok) {
-            const data = await response.json()
-            setModels(data.models)
-        };
+            if (response.ok) {
+                const data = await response.json()
+                setModels(data.models)
+            };
+
+        } catch(e) {
+            console.error(e)
+        }
     };
 
     const handleColorChange = (event) => {
@@ -53,15 +57,20 @@ function AutomobilesAdd () {
                 'Content-Type': 'application/json',
             },
         };
-        const response = await fetch(url, fetchConfig)
 
-        if (response.ok) {
-            event.target.reset()
-            setColor('')
-            setYear('')
-            setVIN('')
-            setModel('')
-        };
+        try {
+            const response = await fetch(url, fetchConfig)
+
+            if (response.ok) {
+                setColor('')
+                setYear('')
+                setVIN('')
+                setModel('')
+            };
+
+        } catch(e) {
+            console.error(e)
+        }
     };
 
     useEffect(() => {

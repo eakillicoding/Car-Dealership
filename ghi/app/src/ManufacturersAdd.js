@@ -21,11 +21,15 @@ function ManufacturersAdd () {
                 'Content-Type': 'application/json',
             },
         };
-        const response = await fetch(url, fetchConfig)
+        try {
+            const response = await fetch(url, fetchConfig)
 
-        if (response.ok) {
-            event.target.reset()
-            setName('')
+            if (response.ok) {
+                setName('')
+            }
+
+        } catch(e) {
+            console.error(e)
         }
     };
 
@@ -36,7 +40,7 @@ function ManufacturersAdd () {
                     <h2>Create a manufacturer</h2>
                     <form onSubmit={handleSubmit} id="create-manufacturer-form">
                         <div className="form-floating mb-3">
-                            <input value={name} onChange={handleNameChange} placeholder="Manufacturer name" required type="text" id="name" autoComplete="on" className="form-control" />
+                            <input value={name} onChange={handleNameChange} placeholder="Manufacturer name" required type="text" id="name" className="form-control" />
                             <label htmlFor="name">Manufacturer name...</label>
                         </div>
                         <button className="btn btn-primary">Create</button>

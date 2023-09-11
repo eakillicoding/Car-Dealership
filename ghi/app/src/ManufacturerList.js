@@ -4,13 +4,16 @@ function ManufacturerList() {
     const [manufacturers, setManufacturers] = useState([])
 
     async function fetchManufacturersData() {
-        const response = await fetch("http://localhost:8100/api/manufacturers/")
+        try {
+            const response = await fetch("http://localhost:8100/api/manufacturers/")
 
-        if (response.ok) {
-            const data = await response.json()
-            setManufacturers(data.manufacturers)
-        } else {
-            console.error(response)
+            if (response.ok) {
+                const data = await response.json()
+                setManufacturers(data.manufacturers)
+            }
+
+        } catch(e) {
+            console.error(e)
         }
     };
 

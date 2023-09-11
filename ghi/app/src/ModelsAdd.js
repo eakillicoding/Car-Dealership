@@ -7,13 +7,17 @@ function ModelsAdd () {
     const [manufacturers, setManufacturers] = useState([])
 
     const fetchManufacturersData = async () => {
-        const url = 'http://localhost:8100/api/manufacturers/'
-        const response = await fetch(url)
+        try {
+            const response = await fetch('http://localhost:8100/api/manufacturers/')
 
-        if (response.ok) {
-            const data = await response.json()
-            setManufacturers(data.manufacturers)
-        };
+            if (response.ok) {
+                const data = await response.json()
+                setManufacturers(data.manufacturers)
+            };
+
+        } catch(e) {
+            console.error(e)
+        }
     };
 
     const handleNameChange = (event) => {
@@ -46,14 +50,19 @@ function ModelsAdd () {
                 'Content-Type': 'application/json',
             },
         };
-        const response = await fetch(url, fetchConfig)
 
-        if (response.ok) {
-            event.target.reset()
-            setName('')
-            setPictureUrl('')
-            setManufacturer('')
-        };
+        try {
+            const response = await fetch(url, fetchConfig)
+
+            if (response.ok) {
+                setName('')
+                setPictureUrl('')
+                setManufacturer('')
+            };
+
+        } catch(e) {
+            console.error(e)
+        }
     };
 
     useEffect(() => {
@@ -78,7 +87,7 @@ function ModelsAdd () {
                             <select value={manufacturer} onChange={handleManufacturerChange} required name="manufacturer_id" id="manufacturer_id" className="form-select" >
                                 <option value="">Choose a manufacturer...</option>
                                 {manufacturers.map(manufacturer => {
-                                    return(
+                                    return (
                                         <option key={manufacturer.id} value={manufacturer.id}>
                                             {manufacturer.name}
                                         </option>

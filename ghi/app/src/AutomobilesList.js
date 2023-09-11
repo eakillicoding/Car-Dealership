@@ -4,13 +4,16 @@ function AutomobilesList() {
     const [automobiles, setAutomobiles] = useState([])
 
     async function fetchAutomobilesData() {
-        const response = await fetch("http://localhost:8100/api/automobiles/")
+        try {
+            const response = await fetch("http://localhost:8100/api/automobiles/")
 
-        if (response.ok) {
-            const data = await response.json()
-            setAutomobiles(data.autos)
-        } else {
-            console.error(response)
+            if (response.ok) {
+                const data = await response.json()
+                setAutomobiles(data.autos)
+            }
+
+        } catch(e) {
+            console.error(e)
         }
     };
 
