@@ -139,16 +139,7 @@ function SalesAdd () {
                     <form onSubmit={(event) => handleSubmit(event)} id="create-sale-form">
                         <h5>Automobile VIN</h5>
                         <div className="mb-3">
-                            <select value={automobile} onChange={handleAutomobileChange} required name="automobile" id="automobile" className="form-select" >
-                                <option value="">Choose an automobile VIN...</option>
-                                {automobiles.filter(automobile => automobile.sold===false).map(automobile => {
-                                    return (
-                                        <option key={automobile.vin} value={automobile.vin}>
-                                            {automobile.vin}
-                                        </option>
-                                    );
-                                })}
-                            </select>
+                        <input value={automobile} onChange={handleAutomobileChange} placeholder="VIN" required type="text" id="automobile" className="form-control" />
                         </div>
                         <h5>Salesperson</h5>
                         <div className="mb-3">

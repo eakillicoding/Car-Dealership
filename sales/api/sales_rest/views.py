@@ -126,14 +126,6 @@ def api_list_sales(request):
     else:
         content = json.loads(request.body)
         try:
-            automobile = AutomobileVO.objects.get(vin=content["automobile"])
-            content["automobile"] = automobile
-        except:
-            return JsonResponse(
-                {"message": "Invalid Automobile vin"},
-                status=400,
-            )
-        try:
             salesperson = Salesperson.objects.get(employee_id=content["salesperson"])
             content["salesperson"] = salesperson
         except:

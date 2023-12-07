@@ -20,11 +20,7 @@ class Customer(models.Model):
 
 
 class Sale(models.Model):
-    automobile = models.ForeignKey(
-        AutomobileVO,
-        related_name="automobile",
-        on_delete=models.CASCADE,
-    )
+    automobile = models.CharField(max_length=17)
     salesperson = models.ForeignKey(
         Salesperson,
         related_name="salesperson",
